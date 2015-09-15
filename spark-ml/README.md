@@ -18,3 +18,5 @@ Redirecting the output into a file help you looking at the useful information as
 Spark needs to be installed and configured before running these commands.
 Further details on spark installation can be found at:
 https://spark.apache.org/docs/1.0.1/spark-standalone.html
+
+The respective R codes used can also be found in the directory R-Code.
