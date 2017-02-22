@@ -1,3 +1,6 @@
+###############
+###Illustration code for running neural network
+###############
 library(e1071); library(ggplot2)
 install.packages("neuralnet");library(neuralnet)
 ggplot() + geom_point(data=iris, aes(x=Petal.Length,y=Petal.Width,shape=Species, colour=Species))
