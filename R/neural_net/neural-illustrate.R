@@ -1,5 +1,6 @@
 ###############
 ###Illustration code for running neural network
+###Author: Vivek Murugesan
 ###############
 library(e1071); library(ggplot2)
 install.packages("neuralnet");library(neuralnet)
