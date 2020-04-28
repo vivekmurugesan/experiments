@@ -3,8 +3,7 @@ package sandbox.test.monad.free
 import sandbox.test.KafkaClient
 import sandbox.test.monad.FileClient
 
-object FreeMonadKafka { //extends App{
-
+object FreeMonadKafka { 
   // Algebra
 
   /**
