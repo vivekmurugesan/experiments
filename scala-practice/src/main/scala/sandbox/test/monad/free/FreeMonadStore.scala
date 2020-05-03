@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit
 
 import cats.{Id, ~>}
 import cats.free.Free
+
 import sandbox.test.monad.{FileClient, KafkaClient}
 
 object FreeMonadStore {
@@ -39,15 +40,13 @@ object FreeMonadStore {
   def delete[T](uri: String, value: T): StoreAction[Option[T]] =
     liftF[StoreActionA, Option[T]](Delete[T](uri, value))
 
-  case class KafkaTopic(val name: String, val partitionCount: Int, val replicationFactor: Short){
+  case class KafkaTopic(val name: String, val partitionCount: Int, val replicationFactor: Short) {
     override def toString: String =
       s"{topicName: $name, partitionCount: $partitionCount, replicationFactor: $replicationFactor}";
   }
 
   // Program
-
   val uriVal = "localhost:9092"
-
   def program: StoreAction[Unit] =
     for {
       _ <- create(uriVal, KafkaTopic("test_topic3", 3, 1.toShort))
@@ -57,8 +56,6 @@ object FreeMonadStore {
       _ <- delete(uriVal, KafkaTopic("test_topic4", 3, 1.toShort))
       list <- getAll(uriVal)
     } yield ()
-
-
 
   // Impure compiler
   def impureComiler: StoreActionA ~> Id =
@@ -98,7 +95,6 @@ object FreeMonadStore {
         }
     }
 
-
   val targetDir = "/tmp/test"
 
   def programFile: StoreAction[Unit] =
@@ -109,8 +105,6 @@ object FreeMonadStore {
       _ <- create(targetDir, "testDir3")
       list <- getAll(targetDir)
     } yield ()
-
-
 
   // Impure compiler
   import cats.{Id, ~>}
