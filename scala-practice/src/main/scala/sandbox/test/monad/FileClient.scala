@@ -6,7 +6,8 @@ class FileClient(val targetDir: String) {
 
   def create(name: String) = {
     val path: Path = Paths.get(s"$targetDir/$name")
-    Files.createDirectory(path)
+    val resultPath = Files.createDirectory(path)
+    resultPath.toString
   }
 
   def delete(name: String) = {

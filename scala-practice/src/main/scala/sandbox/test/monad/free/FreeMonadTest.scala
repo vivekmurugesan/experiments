@@ -93,7 +93,11 @@ object FreeMonadTest extends App{
     }
 
 
-  val result: Option[Int] = program.foldMap(impureComiler)
+  //def main(args: Array[String]): Unit = {
+    val result: Option[Int] = program.foldMap(impureComiler)
+    //println(result)
+  //}
+
 
   // Pure compiler using state monad.
 

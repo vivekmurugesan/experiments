@@ -1,4 +1,4 @@
-package sandbox.test
+package sandbox.test.monad
 
 //import java.util
 import java.util.Properties
@@ -9,19 +9,20 @@ import org.apache.kafka.clients.admin._
 //import org.apache.kafka.common.config.{ConfigResource, TopicConfig}
 //import org.apache.kafka.common.resource.{Resource, ResourceType}
 
-import collection.JavaConverters._
+import scala.collection.JavaConverters._
 
 class KafkaClient(val uriVal: String) {
 
   def createTopic(name: String, partitionCount: Int,
-                  replicationFactor: Short): Unit = {
+                  replicationFactor: Short): CreateTopicsResult = {
     val props = new Properties()
     props.setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, uriVal)
     val adminClient = AdminClient.create(props)
     println("creating topic")
     val newTopic = new NewTopic(name, partitionCount, replicationFactor.toShort)
-    adminClient.createTopics(List(newTopic).asJavaCollection)
+    val result = adminClient.createTopics(List(newTopic).asJavaCollection)
     println("Topic creation done..")
+    result
   }
 
   def listTopics() ={
@@ -41,8 +42,8 @@ class KafkaClient(val uriVal: String) {
     val adminClient = AdminClient.create(props)
     println("deleting topic")
     //val newTopic = new NewTopic(name, partitionCount, replicationFactor.toShort)
-    adminClient.deleteTopics(List(name).asJavaCollection)
     println("Topic deletion done..")
+    adminClient.deleteTopics(List(name).asJavaCollection)
   }
 
   def main(args: Array[String]): Unit = {
