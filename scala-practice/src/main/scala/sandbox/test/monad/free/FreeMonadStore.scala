@@ -1,11 +1,13 @@
 package sandbox.test.monad.free
 
+import cats.{Id, ~>}
+
+
 import sandbox.test.KafkaClient
 import sandbox.test.monad.FileClient
 
-object FreeMonadKafka { 
+object FreeMonadKafka {
   // Algebra
-
   /**
    * Representing grammar using ADT (Algebraic Data Type).
    * ADT types need to be created to represent key-value operations
@@ -50,7 +52,7 @@ object FreeMonadKafka {
   def program: StoreInterface[Unit] =
     for {
       _ <- create(uriVal, KafkaTopic("test_topic3", 3, 1.toShort))
-     _ <- create(uriVal, KafkaTopic("test_topic4", 3, 1.toShort))
+      _ <- create(uriVal, KafkaTopic("test_topic4", 3, 1.toShort))
       _ <- delete(uriVal, KafkaTopic("test_topic3", 3, 1.toShort))
       list <- getAll(uriVal)
     } yield list
@@ -58,8 +60,6 @@ object FreeMonadKafka {
 
 
   // Impure compiler
-  import cats.{Id, ~>}
-
   def impureComiler: StoreInterfaceA ~> Id =
     new (StoreInterfaceA ~> Id) {
       val kafkaClient = new KafkaClient("localhost:9092")

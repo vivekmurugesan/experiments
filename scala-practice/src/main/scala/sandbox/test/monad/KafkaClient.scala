@@ -13,16 +13,6 @@ import collection.JavaConverters._
 
 class KafkaClient(val uriVal: String) {
 
-
-
-
-  // Init block
-  {
-
-  }
-
-
-
   def createTopic(name: String, partitionCount: Int,
                   replicationFactor: Short): Unit = {
     val props = new Properties()
@@ -39,9 +29,10 @@ class KafkaClient(val uriVal: String) {
     val props = new Properties()
     props.setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, uriVal)
     val adminClient = AdminClient.create(props)
-    val result = adminClient.listTopics(new ListTopicsOptions().timeoutMs(5000).listInternal(true))
+    val result = adminClient.listTopics(new ListTopicsOptions().timeoutMs(10000).listInternal(true))
     println("list topics")
     println(result.listings().get())
+    result.listings().get()
   }
 
   def deleteTopic(name: String) = {

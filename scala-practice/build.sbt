@@ -19,5 +19,9 @@ libraryDependencies += "org.typelevel" %% "cats-free" % "1.4.0"
 // https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients
 libraryDependencies += "org.apache.kafka" % "kafka-clients" % "2.5.0"
 
+// https://mvnrepository.com/artifact/org.typelevel/cats-effect-laws
+libraryDependencies += "org.typelevel" %% "cats-effect-laws" % "1.4.0"
+
+
 
 addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.3")
